@@ -1,0 +1,25 @@
+<html>
+
+<body>
+	<div class="modal-header">
+            <h3 class="modal-title">Choose keywords to add from the following list</h3>
+        </div>
+        <div class="modal-body">
+			<b>{[{error}]}</b><br>
+			Selected: <b>{[{ selected.item }]}</b>
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="" ng-click="selected.item = item">{[{ item }]}</a>
+                </li>
+            </ul>
+			Keywords: <b ng-repeat="k in keywords">{[{k}]}&nbsp;&nbsp;</b>
+			
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="add()">Add</button>
+            <button class="btn btn-warning" ng-click="done()">Done</button>
+			<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<div style="align:left">
+<table ng-controller="page1Controller" align="right" width="100%">
+	<tr>
+		<td bgcolor="#0071bc" colspan="2" style="padding-left: 20px"><h2><font color="white">Application Description</font></h2></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="right"><h4><div>Hold over the&nbsp;&nbsp;<img src="static/tooltip_icon.png" width="18" height="18">&nbsp;&nbsp;icon for more information</div></h4></td>
+	</tr>
+	<tr>
+		<td width="32%"><h4>Application name&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Name of your application</span></div></h4></td>
+		<td><input type="text" ng-model="applicationName"></input>
+		<button ng-click="addName()">Set</button></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{[{appName}]}</td>
+	</tr>
+	
+	<tr>
+		<td><h4>Components name&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Name of the components</span></div></h4></td>
+		<td><input type="text" ng-model="componentName"></input>
+		<button ng-click="addComponent()">Add</button>
+			
+		</td>
+	</tr>
+	
+	<tr ng-repeat="componentName in components">
+		<td></td>
+		<td style="padding-bottom: 20px">
+			<input type="text" value={[{componentName.name}]} readonly></input>&nbsp;
+			<button ng-click="removeComponent($index)">Remove</button>
+		</td>
+    </tr>
+	
+	<tr>
+		<td><h4>Conflicts between components&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">The pair of components specified cannot be deployed on the same virtual machine.</span></div></h4></td>
+		<td>
+			<select ng-model="conf1">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<select ng-model="conf2">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>	
+			<button ng-click="addConflict()">Add</button>
+		</td>
+	</tr>
+	
+	<!--<tr><td>(for non-specified ones there are no conflicts)</td></tr> -->
+	
+	<tr ng-repeat="conflict in conflicts">
+		<td></td>
+		<td style="padding-bottom:20px">Component&nbsp;<b>{[{conflict[0]}]}</b>&nbsp;is in conflict with component&nbsp;<b>{[{conflict[1]}]}</b>&nbsp;
+			<button ng-click="removeConflict($index)">Remove</button>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><h4>Dependencies between components&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">The pair of components should be assigned to the same virtual machine or the number of instances of components should satisfy some constraints.</span></div></h4></td>
+		<td style="padding-bottom:20px">
+			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep1" value="vmc"><label for="dep1"><div title="The pair of components should be deployed on the same virtual machine">One to One Dependency</div></label></input><br>
+			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep2" value="mtm"><label for="dep2"><div title="The number of deployed instances of the first component is related to the number of instances of the second component.">Many to Many Dependency</div></label></input><br>
+			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep3" value="otm"><label for="dep3"><div title="TBD">One to Many Dependency</div></label></input>
+		</td>
+	</tr>
+	
+	<tr ng-switch="selectedDependency">
+		<td></td>
+		<td style="padding-bottom:20px" ng-switch-when="vmc">
+			<select ng-model="$parent.colo1">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<select ng-model="$parent.colo2">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>
+			<button ng-click="addColocation()">Add</button>
+		
+		</td>
+		<td style="padding-bottom:20px" ng-switch-when="mtm">
+			<select ng-model="$parent.many1">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>
+			&nbsp;
+			<select ng-model="$parent.manyRelation">
+				<option disabled selected value style="display:none"></option>
+				<option ng-repeat="rel in relations">{[{rel}]}</option>
+			</select>&nbsp;
+			<select ng-model="$parent.many2">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>
+			<button ng-click="addManyToMany()">Add</button>
+		</td>
+		<td style="padding-bottom:20px" ng-switch-when="otm">
+			<select ng-model="$parent.one1">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>
+			&nbsp;
+			<input type="number" min="1" max="50" ng-model="$parent.oneNumber"></input>&nbsp;
+			<select ng-model="$parent.one2">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>
+			<button ng-click="addOneToMany()">Add</button>
+		</td>
+	</tr>
+	
+	<tr ng-repeat="colocation in colocations">
+		<td></td>
+		<td style="padding-bottom:20px">Component&nbsp;<b>{[{colocation[0]}]}</b>&nbsp;and&nbsp;<b>{[{colocation[1]}]}</b>&nbsp;are deployed on the same virtual machine.&nbsp;
+			<button ng-click="removeColocation($index)">Remove</button>
+		</td>
+	</tr>
+	
+	<tr ng-repeat="many in manys">
+		<td></td>
+		<td style="padding-bottom:20px">For one instance of component&nbsp;{[{many[0]}]}&nbsp;&nbsp;{[{many[1]}]}&nbsp;&nbsp;{[{many[2]}]}&nbsp;
+			<button ng-click="removeMany($index)">Remove</button>
+		</td>
+	</tr>
+	
+	<tr ng-repeat="one in ones">
+		<td></td>
+		<td style="padding-bottom:20px">For one instance of component&nbsp;<b>{[{one[0]}]}</b>&nbsp;are deployed&nbsp;<b>{[{one[1]}]}</b>&nbsp;components&nbsp;<b>{[{one[2]}]}</b>&nbsp;
+			<button ng-click="removeOne($index)">Remove</button>
+		</td>
+	</tr>
+	<tr>
+		<td><h4>Number of instances of components&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">A component or a set of components should be deployed a certain number of times.</span></div></h4></td>
+		<td style="padding-bottom:20px">
+			<input type="radio" name="instances" ng-model="selectedInstances"  id="inst1" value="ule"><label for="inst1"><div title="The number of instances of a set of components is equal, greater or less than given values">Upper/Lower/Equal Bound</div></label></input><br>
+			<input type="radio" name="instances" ng-model="selectedInstances"  id="inst2" value="rb"><label for="inst2"><div title="The number of instances of a set of components belongs to a specified interval.">Range Bound</div></label></input><br>
+			<input type="radio" name="instances" ng-model="selectedInstances"  id="inst3" value="fd"><label for="inst3"><div title="Component must be deployed on all virtual machines (unless conflicts between components exist).">Full Deployment</div></label></input>
+		</td>
+	</tr>
+	
+	<tr ng-switch="selectedInstances">
+		<td></td>
+		<td style="padding-bottom:20px" ng-switch-when="ule">
+			<select ng-model="$parent.comp">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>&nbsp;
+			<select ng-model="$parent.relation">
+				<option disabled selected value style="display:none"> -- relation -- </option>
+				<option ng-repeat="rel in relations">{[{rel}]}</option>
+			</select>&nbsp;
+			<input type="number" min="1" max="50" ng-model="$parent.number"></input>
+			<button title="Value must be smaller or equal to 50" ng-click="addInstance()">Add</button>
+		</td>
+		<td style="padding-bottom:20px" ng-switch-when="rb">
+			<input type="number" min="1" max="50" ng-model="$parent.bound1"></input>
+			<select ng-model="$parent.compBound">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>&nbsp;
+			<input type="number" min="1" max="50" ng-model="$parent.bound2"></input>
+			<button title="Value must be smaller or equal to 50" ng-click="addRangeBoundInstance()">Add</button>
+		</td>
+		<td style="padding-bottom:20px" ng-switch-when="fd">
+		
+			<select ng-model="$parent.compFullDepl">
+				<option disabled selected value style="display:none"> -- select a component -- </option>
+				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
+			</select>&nbsp;
+			<button ng-click="addFullDeployment()">Add</button>
+		</td>
+		
+	</tr>
+	
+	<tr ng-repeat="instance in instances">
+		<td></td>
+		<td>Component&nbsp;<b>{[{instance[0]}]}</b>&nbsp;is deployed&nbsp;<b>{[{instance[3]}]}</b>&nbsp;<b>{[{instance[2]}]}</b>&nbsp;times
+			<button ng-click="removeInstance($index)">Remove</button>
+			
+		</td>
+	</tr>
+	<tr ng-repeat="instanceBound in instancesBounds">
+		<td></td>
+		<td>Component &nbsp;<b>{[{instanceBound[1]}]}</b>&nbsp;is deployed at least&nbsp;<b>{[{instanceBound[0]}]}</b>&nbsp;and at most&nbsp;<b>{[{instanceBound[2]}]}</b>&nbsp;times;
+			<button ng-click="removeInstanceBound($index)">Remove</button>
+		</td>
+	</tr>
+	<tr ng-repeat="instanceFullDeployment in instancesFullDeployment">
+		<td></td>
+		<td>Component&nbsp;<b>{[{instanceFullDeployment}]}</b>&nbsp;is deployed on all virtual machines (unless conflicts between components exist).
+			<button ng-click="removeInstanceFullDeplyment($index)">Remove</button>
+		</td>
+	</tr>
+	<tr>
+		<td><h4>Public IPs&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Number and type of Public IPs</span></div></h4></td>
+		<td>
+			<input type="number" min="1" max="100" ng-model="IP.publicIPs">
+			<select ng-model="IP.IPType">
+			<option disabled selected value style="display:none">--</option>
+			<option value="ipv4">IPv4</option>
+			<option value="ipv6">IPv6</option></select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="left"><h4>Budget&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Maximum budget in US Dollars</span></div></td>
+		<td><input type="text" ng-model="budget.value" style="width:70px;"></h4></td>
+	</tr>
+	
+	
+	<tr>
+		<td style="padding-top:20px" align="center" colspan="2"><button class="button-submit"name="topage2" onclick="location.href = '#!topage2'"><font color="white">Next</font></button></td>
+	</tr>
+</table>
+</div>
