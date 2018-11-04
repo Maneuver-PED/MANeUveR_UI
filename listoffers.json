@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "offer1",
+    "content": [
+      {
+        "id": 1,
+        "name": "xlarge",
+        "characteristics": {
+          "Compute": {
+            "CPU": 2,
+            "GPU": "false",
+            "Memory": 2048
+          },
+          "Storage": {
+            "StorageType": "SSD",
+            "StorageSize": 500
+          },
+          "Network": {
+            "networkConnections": 20,
+            "dataIn": 200,
+            "dataOut": 200
+          },
+          "operatingSystem": "Linux",
+          "price": 10
+        },
+        "components": [
+          "component 1",
+          "component 2"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "small",
+        "characteristics": {
+          "Compute": {
+            "CPU": 1,
+            "GPU": "false",
+            "Memory": 512
+          },
+          "Storage": {
+            "StorageType": "SSD",
+            "StorageSize": 500
+          },
+          "Network": {
+            "networkConnections": 20,
+            "dataIn": 200,
+            "dataOut": 200
+          },
+          "operatingSystem": "Linux",
+          "price": 10
+        },
+        "components": [
+          "component 3"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "offer2",
+    "content": [
+      {
+        "id": 1,
+        "name": "medium",
+        "characteristics": {
+          "Compute": {
+            "CPU": 2,
+            "GPU": "false",
+            "Memory": 4096
+          },
+          "Storage": {
+            "StorageType": "SSD",
+            "StorageSize": 1500
+          },
+          "Network": {
+            "networkConnections": 20,
+            "dataIn": 200,
+            "dataOut": 200
+          },
+          "operatingSystem": "Linux",
+          "price": 10
+        },
+        "components": [
+          "component 1",
+          "component 2",
+          "component 3"
+        ]
+      }
+    ]
+  }
+]
