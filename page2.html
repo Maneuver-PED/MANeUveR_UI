@@ -14,7 +14,6 @@
 
 <div class="w3-example" ng-repeat="fullComp in components">
 	<h3 align="left" style="padding-left:20px">{[{fullComp.name}]}</h3>
-
 		<table  id="specs" width="100%"align="center">
 			<tr>
 				<td width="35%"><h5>Compute</h5></td>
@@ -24,9 +23,11 @@
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="4">4</option>
-					<option value="6">6</option>
 					<option value="8">8</option>
-					</select>&nbsp;&nbsp;&nbsp;&nbsp;
+					<option value="16">16</option>
+						<option value="32">32</option>
+						<option value="64">64</option>
+					</select>&nbsp;&nbsp;
 					
 					GPU&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Denotes if a GPU is present.</span></div>&nbsp;&nbsp;
 					<input ng-model="fullComp.Compute.GPU" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -34,12 +35,16 @@
 					Memory&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Quantity of RAM in GB.</span></div>&nbsp;
 					<select ng-model="fullComp.Compute.Memory">
 					<option disabled selected value style="display:none"></option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="4">4</option>
-					<option value="8">8</option>
-					<option value="16">16</option>
+					<option value="1000">1</option>
+					<option value="3000">3</option>
+					<option value="7000">7</option>
+					<option value="32000">32</option>
+					<option value="34000">34</option>
+						<option value="64000">64</option>
+						<option value="128000">128</option>
+						<option value="256000">256</option>
 					</h5>
+
 				</td>
 				<td align="right"></td>
 			</tr>
@@ -55,11 +60,10 @@
 					Size&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Storage size in GB</span></div>&nbsp;&nbsp;
 					<select ng-model="lowstorage">
 						<option disabled selected value style="display:none">--</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="4">4</option>
-						<option value="8">8</option>
-						<option value="16">16</option>
+						<option value="1000">1</option>
+						<option value="2000">2</option>
+						<option value="4000">4</option>
+						<option value="8000">8</option>
 					</select>
 					</h5>
 				</td>

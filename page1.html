@@ -15,7 +15,6 @@
 		<td></td>
 		<td>{[{appName}]}</td>
 	</tr>
-	
 	<tr>
 		<td><h4>Components name&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Name of the components</span></div></h4></td>
 		<td><input type="text" ng-model="componentName"></input>
@@ -23,7 +22,6 @@
 			
 		</td>
 	</tr>
-	
 	<tr ng-repeat="componentName in components">
 		<td></td>
 		<td style="padding-bottom: 20px">
@@ -31,7 +29,6 @@
 			<button ng-click="removeComponent($index)">Remove</button>
 		</td>
     </tr>
-	
 	<tr>
 		<td><h4>Conflicts between components&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">The pair of components specified cannot be deployed on the same virtual machine.</span></div></h4></td>
 		<td>
@@ -39,7 +36,7 @@
 				<option disabled selected value style="display:none"> -- select a component -- </option>
 				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>
 			</select>
-			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;
 			<select ng-model="conf2">
 				<option disabled selected value style="display:none"> -- select a component -- </option>
 				<option ng-repeat="componentName in components">{[{componentName.name}]}</option>

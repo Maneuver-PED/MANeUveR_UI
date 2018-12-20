@@ -1,17 +1,15 @@
 var app=angular.module("mainApp", ["ngRoute","ui.bootstrap"]);
 
-app.config(function($interpolateProvider) {
+app.config(function($interpolateProvider,$qProvider) {
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
- });
+    $qProvider.errorOnUnhandledRejections(false);
+});
 
 app.run(function($rootScope) {
         $rootScope.components=[];
 		$rootScope.appName="";
-		
-		
 		$rootScope.restrictions=[];
-		
 	    $rootScope.conflicts=[];
 		$rootScope.colocations=[];
 		$rootScope.manys=[];
@@ -19,7 +17,6 @@ app.run(function($rootScope) {
 		$rootScope.instances=[];
 		$rootScope.instancesBounds=[];
 		$rootScope.instancesFullDeployment=[];
-		
 
 		$rootScope.IP={
 			publicIPs:0,
@@ -397,7 +394,7 @@ app.controller("page1Controller", function($scope,$rootScope,$modal, $log) {
 
 //--------------------------------------------------------------------------------------------------------
 
-app.controller("page2Controller", function($scope,$rootScope,$modal,$log) {
+app.controller("page2Controller", function($scope, $rootScope, $modal, $log, $http, $location) {
 	
 	$scope.K=[];
 	$scope.items = ['Stream Processing', 'Big Data Application', 'Queue'];
@@ -526,19 +523,19 @@ app.controller("page2Controller", function($scope,$rootScope,$modal,$log) {
 		conflict={
 			type:"Conflicts",
 			alphaCompId: -1,
-			compIdList:[]
+			compsIdList:[]
 		}
 		list=[];
 		for(var i=0;i<$rootScope.conflicts.length;i++){
-			conflict.compIdList.length=0;
+			conflict.compsIdList.length=0;
 			if(!contains(list,getIdOf($rootScope.conflicts[i][0]))){
 				conflict.alphaCompId=getIdOf($rootScope.conflicts[i][0]);
-				conflict.compIdList.push(getIdOf($rootScope.conflicts[i][1]));
+				conflict.compsIdList.push(getIdOf($rootScope.conflicts[i][1]));
 				list.push(jQuery.extend(true, {}, conflict));
 				console.log(getIdOf($rootScope.conflicts[i][0])+" "+getIdOf($rootScope.conflicts[i][1]));
 			}else{
 				var index=getIndexInList(list,getIdOf($rootScope.conflicts[i][0]));
-				list[index].compIdList.push(getIdOf($rootScope.conflicts[i][1]));
+				list[index].compsIdList.push(getIdOf($rootScope.conflicts[i][1]));
 				console.log("alpha"+index+" "+getIdOf($rootScope.conflicts[i][1]));
 			}
 		}
@@ -681,16 +678,42 @@ app.controller("page2Controller", function($scope,$rootScope,$modal,$log) {
 		saveTextAsFile(fileText, fileName);
 	}
 
-	
-	
 	$scope.generateJSON=function(){
 		generateIdForComponents();
 		addRestrictions();
-		$scope.jsonStringified = angular.toJson($scope.schema, true);
-		expFile($scope.jsonStringified);
+		// save JSON locally
+		//$scope.jsonStringified = angular.toJson($scope.schema, true);
+		//expFile($scope.jsonStringified);
+        // REST
+		data = angular.toJson($scope.schema, true);
+        headers= {
+            'Content-Type': 'application/json',
+			'Cache-Control':'no-cache',
+            'Access-Control-Allow-Origin': '*'
+        };
+
+        $http.post('http://127.0.0.1:5000/re/z3', data, {headers:headers}).
+        then(function(response) {
+            console.log("Merge post ", response.data);
+            //redirect to the outputOffers view, passing the json data as a parameter
+            $location.path('results').search({jsonData: response.data });
+        });
 	}
 });
 
+app.controller("resultsController", function($scope, $routeParams){
+    (function() {
+        if($routeParams.jsonData == null || $routeParams.jsonData === ""){
+            //If the jsonData is not set or if it doesnt contain a value (i.e is the empty string) then redirect to the page2 view.
+            $location.path('topage2');
+        }else{
+            //the jsonData parameter does exist so assign it to our scope.greeting variable so we can use it in our view.
+            $scope.greeting = $routeParams.jsonData[0];
+            //log the data to make sure it was passed as parameter:
+            console.log("resultsControler ", $scope.greeting);
+        }
+    })();
+});
 
 
 //--------------------------------------------------------------------------------------------------------
@@ -705,6 +728,10 @@ app.config(function($routeProvider) {
         templateUrl : "page2.html",
         controller : "page2Controller"
     })
+	.when("/results", {
+            templateUrl : "outputOffers.html",
+            controller : "resultsController"
+        })
 	.otherwise({
         templateUrl : "page1.html",
         controller : "page1Controller"

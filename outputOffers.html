@@ -1,60 +1,16 @@
-<!DOCTYPE html>
-<html>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+	<p>id: {{greeting.id}}</p>
+	<p>clockspeed: {{greeting.offer.clockSpeed}} </p>
 
 
-<script src="static/app.js"></script>
-<head>
-	<title>MANeUveR</title>
-	<link rel="stylesheet" href="static/styles.css" type="text/css">
-	<link rel="stylesheet" href="static/bootstrap.min.css" type="text/css">
-</head>
-<body  ng-app="mainApp"> 
-<table width="90%" align="center">
-	<tr> 
-		<td align="center"><img src="static/MANlogo_150x150.png" alt="MANeUveR"></td>
-		<td align="center"><h1>MANeUveR Management Agency for Cloud Resources</h1></td>
-	</tr>
+<!--
+The JSON looks like this (it is actually a list of JSONs which needs to be displayed):
 
-	<tr>
-		<td bgcolor="#0071bc" colspan="2" style="padding-left: 20px"><h2><font color="white">List of Offers</font></h2></td>
-	</tr>
-	
-	<tr>
-		<td colspan="2" align="center"><div class="main-content">
-
-			<div class="all-products page">
-
-				<ul class="products-list">
-					<script id="products-template" type="x-handlebars-template">​
-					{{#each this}}
-					<li data-index="{{id}}">
-						<h2><a href="#"> {{name}} </a></h2>
-						<ul class="product-description">
-							<li><span>Manufacturer: </span>{{specs.manufacturer}}</li>
-							<li><span>Storage: </span>{{specs.storage}} GB</li>
-							<li><span>OS: </span>{{specs.os}}</li>
-							<li><span>Camera: </span>{{specs.camera}} Mpx</li>
-						</ul>
-						<button>Buy Now!</button>
-						<p class="product-price">{{price}}$</p>
-						<div class="highlight"></div>
-					</li>
-					{{/each}}
-					</script>
-				</ul>
-
-			</div>
-
-			<div class="error page">
-				<h3>Sorry, something went wrong :(</h3>
-			</div>
-
-		</div></td>
-	</tr>
-</table>
-</body>
-</html>
+[{\"id\": 1, \"components\": [\"sssss\"], \"offer\": {\"appliesTo\": [], \"clockSpeed\": \"2.3 GHz\", \"currentGeneration\": \"Yes\",
+\"dedicatedEbsThroughput\": \"12000 Mbps\", \"description\": \"$4.888 per Dedicated Linux h1.16xlarge Instance Hour\", \"ecu\": \"188\",
+\"enhancedNetworkingSupported\": \"Yes\", \"instanceFamily\": \"Storage optimized\", \"instanceType\": \"h1.16xlarge\", \"licenseModel\":
+\"No License required\", \"location\": \"EU (Ireland)\", \"locationType\": \"AWS Region\", \"memory\": 256.0, \"networkPerformance\":
+\"25 Gigabit\", \"operatingSystem\": \"Linux\", \"physicalProcessor\": \"Intel Xeon E5-2686 v4 (Broadwell)\", \"preInstalledSw\": \"NA\",
+\"pricePerUnit\": {\"USD\": \"4.8880000000\"}, \"processorFeatures\": \"Intel AVX, Intel AVX2, Intel Turbo\", \"storage\": 8.0,
+\"storageType\": \"HDD\", \"terms\": \"OnDemand\", \"unit\": \"Hrs\", \"usagetype\": \"EU-DedicatedUsage:h1.16xlarge\", \"vcpu\": 64.0}}]"
+-->
