@@ -1,16 +1,37 @@
+<table align="center" width="100%">
+    <tr>
+        <td bgcolor="#0071bc" colspan="2" style="padding-left: 20px"><h2><font color="white">Optimal Assignment Plan</font></h2></td>
+    </tr>
+</table>
 
-	<p>id: {{greeting.id}}</p>
-	<p>clockspeed: {{greeting.offer.clockSpeed}} </p>
+<div class="w3-example" ng-repeat="g in greeting">
+    <h3 align="left" style="padding-left:20px">Offer {[{g.id}]}</h3>
+    <table  id="specs" width="100%"align="center">
+        <tr>
+            <td width="35%"><h5>Components</h5></td>
+            <td><p ng-repeat="comp in g.components">{[{comp}]} </p></td>
+            <td align="right"></td>
+        </tr>
 
-
-<!--
-The JSON looks like this (it is actually a list of JSONs which needs to be displayed):
-
-[{\"id\": 1, \"components\": [\"sssss\"], \"offer\": {\"appliesTo\": [], \"clockSpeed\": \"2.3 GHz\", \"currentGeneration\": \"Yes\",
-\"dedicatedEbsThroughput\": \"12000 Mbps\", \"description\": \"$4.888 per Dedicated Linux h1.16xlarge Instance Hour\", \"ecu\": \"188\",
-\"enhancedNetworkingSupported\": \"Yes\", \"instanceFamily\": \"Storage optimized\", \"instanceType\": \"h1.16xlarge\", \"licenseModel\":
-\"No License required\", \"location\": \"EU (Ireland)\", \"locationType\": \"AWS Region\", \"memory\": 256.0, \"networkPerformance\":
-\"25 Gigabit\", \"operatingSystem\": \"Linux\", \"physicalProcessor\": \"Intel Xeon E5-2686 v4 (Broadwell)\", \"preInstalledSw\": \"NA\",
-\"pricePerUnit\": {\"USD\": \"4.8880000000\"}, \"processorFeatures\": \"Intel AVX, Intel AVX2, Intel Turbo\", \"storage\": 8.0,
-\"storageType\": \"HDD\", \"terms\": \"OnDemand\", \"unit\": \"Hrs\", \"usagetype\": \"EU-DedicatedUsage:h1.16xlarge\", \"vcpu\": 64.0}}]"
--->
+        <tr>
+            <td width="35%"><h5>Offer characteristics</h5></td>
+            <td><p><b>Description:</b> {[{g.offer.description}]}</p>
+                <p><b>ECU:</b> {[{g.offer.ecu}]}</p>
+                <p><b>Instance family:</b> {[{g.offer.instanceFamily}]}</p>
+                <p><b>Instance type:</b> {[{g.offer.instanceType}]}</p>
+                <p><b>Location:</b> {[{g.offer.location}]}</p>
+                <p><b>Memory:</b> {[{g.offer.memory}]} GB</p>
+                <p><b>Network performance:</b> {[{g.offer.networkPerformance}]}</p>
+                <p><b>Operating System:</b> {[{g.offer.operatingSystem}]}</p>
+                <p><b>Processor:</b> {[{g.offer.physicalProcessor}]}</p>
+                <p><b>Preinstalled software:</b> {[{g.offer.preInstalledSw}]}</p>
+                <p><b>Price per Unit:</b> {[{g.offer.pricePerUnit.USD}]} USD</p>
+                <p><b>Storage:</b> {[{g.offer.storage}]} GB</p>
+                <p><b>Storage type:</b> {[{g.offer.storageType}]}</p>
+                <p><b>vCPU:</b> {[{g.offer.vcpu}]}</p>
+                <p><b>currentGeneration:</b> {[{g.offer.currentGeneration}]}</p>
+            </td>
+            <td align="right"></td>
+        </tr>
+    </table>
+</div>

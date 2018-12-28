@@ -55,11 +55,11 @@
 	</tr>
 	
 	<tr>
-		<td><h4>Dependencies between components&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">The pair of components should be assigned to the same virtual machine or the number of instances of components should satisfy some constraints.</span></div></h4></td>
+		<td><h4>Dependencies between components&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">The pair of components should be assigned to the same virtual machine or the number of instances of components should satisfy some constraints (see each constraint individually).</span></div></h4></td>
 		<td style="padding-bottom:20px">
 			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep1" value="vmc"><label for="dep1"><div title="The pair of components should be deployed on the same virtual machine">One to One Dependency</div></label></input><br>
-			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep2" value="mtm"><label for="dep2"><div title="The number of deployed instances of the first component is related to the number of instances of the second component.">Many to Many Dependency</div></label></input><br>
-			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep3" value="otm"><label for="dep3"><div title="TBD">One to Many Dependency</div></label></input>
+			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep2" value="mtm"><label for="dep2"><div title="The number of deployed instances of the first component is related to the number of instances of the second component.  = means that sum(instances of first component) == sum(instances of second component); <= means that sum(instances of first component) <= sum(instances of seconnd component); >= means that sum(instances of first component) >= sum(instances of second component)">Many to Many Dependency</div></label></input><br>
+			<input type="radio" name="dependencies" ng-model="selectedDependency"  id="dep3" value="otm"><label for="dep3"><div title="For each first component should be deployed a certain number of second component">One to Many Dependency</div></label></input>
 		</td>
 	</tr>
 	
@@ -191,21 +191,21 @@
 			<button ng-click="removeInstanceFullDeplyment($index)">Remove</button>
 		</td>
 	</tr>
-	<tr>
+	<!--<tr>
 		<td><h4>Public IPs&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Number and type of Public IPs</span></div></h4></td>
 		<td>
 			<input type="number" min="1" max="100" ng-model="IP.publicIPs">
 			<select ng-model="IP.IPType">
-			<option disabled selected value style="display:none">--</option>
+			<option disabled selected value style="display:none">&#45;&#45;</option>
 			<option value="ipv4">IPv4</option>
 			<option value="ipv6">IPv6</option></select>
 		</td>
-	</tr>
+	</tr>-->
 	
-	<tr>
+	<!--<tr>
 		<td align="left"><h4>Budget&nbsp;&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Maximum budget in US Dollars</span></div></td>
 		<td><input type="text" ng-model="budget.value" style="width:70px;"></h4></td>
-	</tr>
+	</tr>-->
 	
 	
 	<tr>

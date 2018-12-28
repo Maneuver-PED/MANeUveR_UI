@@ -696,7 +696,7 @@ app.controller("page2Controller", function($scope, $rootScope, $modal, $log, $ht
         then(function(response) {
             console.log("Merge post ", response.data);
             //redirect to the outputOffers view, passing the json data as a parameter
-            $location.path('results').search({jsonData: response.data });
+            $location.path('results').search({jsonData: response.data});
         });
 	}
 });
@@ -708,7 +708,7 @@ app.controller("resultsController", function($scope, $routeParams){
             $location.path('topage2');
         }else{
             //the jsonData parameter does exist so assign it to our scope.greeting variable so we can use it in our view.
-            $scope.greeting = $routeParams.jsonData[0];
+            $scope.greeting = $routeParams.jsonData;
             //log the data to make sure it was passed as parameter:
             console.log("resultsControler ", $scope.greeting);
         }
