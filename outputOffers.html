@@ -4,7 +4,9 @@
     </tr>
 </table>
 
+<div ng-if="!greeting">
 <div class="w3-example" ng-repeat="g in greeting">
+
     <h3 align="left" style="padding-left:20px">Offer {[{g.id}]}</h3>
     <table  id="specs" width="100%"align="center">
         <tr>
@@ -34,4 +36,9 @@
             <td align="right"></td>
         </tr>
     </table>
+</div>
+</div>
+<div ng-if="greeting">
+    <h3 align="left" style="padding-left:20px">There is no plan satisfying the constraints!</h3>
+</div>
 </div>
