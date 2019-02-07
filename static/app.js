@@ -588,11 +588,11 @@ app.controller("page2Controller", function($scope, $rootScope, $modal, $log, $ht
 	addULEBound=function(){
 		conflict={
 			type:"",
-			alphaCompId: -1,
+            compsIdList: [],
 			bound:0
 		}
 		for(var i=0;i<$rootScope.instances.length;i++){
-			conflict.alphaCompId=getIdOf($rootScope.instances[i][0]);
+			conflict.compsIdList.push(getIdOf($rootScope.instances[i][0]));
 			if($rootScope.instances[i][1]=="="){
 				conflict.type="EqualBound";
 			}else if($rootScope.instances[i][1]=="<="){
@@ -607,26 +607,28 @@ app.controller("page2Controller", function($scope, $rootScope, $modal, $log, $ht
 	addRangeBounds=function(){
 		conflict={
 			type:"RangeBound",
-			alphaCompId: -1,
+            compsIdList: [],
 			lowerBound:0,
 			upperBound:0
 		}
 		for(var i=0;i<$rootScope.instancesBounds.length;i++){
 			conflict.lowerBound=$rootScope.instancesBounds[i][0];
-			conflict.alphaCompId=getIdOf($rootScope.instancesBounds[i][1]);
+			conflict.compsIdList.push(getIdOf($rootScope.instancesBounds[i][1]));
 			conflict.upperBound=$rootScope.instancesBounds[i][2];
 			$rootScope.restrictions.push(jQuery.extend(true, {}, conflict));
 		}
 	}
 	addFullDeployment=function(){
 		conflict={
-			type:"FullDeployment",
-			compIdList:[]
+			type:"FullDeployment1",
+			compsIdList:[]
 		}
+
 		for(var i=0;i<$rootScope.instancesFullDeployment.length;i++){
-			conflict.compIdList.push(getIdOf($rootScope.instancesFullDeployment[i]));	
+			conflict.compsIdList.push(getIdOf($rootScope.instancesFullDeployment[i]));
 		}
-		if(conflict.compIdList.length>0){
+        console.log("FULL DEPLOYMENT: ", conflict);
+		if(conflict.compsIdList.length>0){
 			$rootScope.restrictions.push(jQuery.extend(true, {}, conflict));
 		}
 		
