@@ -111,21 +111,21 @@
 	
 	<tr ng-repeat="colocation in colocations">
 		<td></td>
-		<td style="padding-bottom:20px">Component&nbsp;<b>{[{colocation[0]}]}</b>&nbsp;and&nbsp;<b>{[{colocation[1]}]}</b>&nbsp;are deployed on the same virtual machine.&nbsp;
+		<td style="padding-bottom:20px">Components <b>{[{colocation[0]}]}</b>&nbsp;and&nbsp;<b>{[{colocation[1]}]}</b>&nbsp;are deployed on the same virtual machine.&nbsp;
 			<button ng-click="removeColocation($index)">Remove</button>
 		</td>
 	</tr>
 	
 	<tr ng-repeat="many in manys">
 		<td></td>
-		<td style="padding-bottom:20px">For one instance of component&nbsp;{[{many[0]}]}&nbsp;&nbsp;{[{many[1]}]}&nbsp;&nbsp;{[{many[2]}]}&nbsp;
+		<td style="padding-bottom:20px">The number of deployed instances of <b>{[{many[0]}]}</b>&nbsp;is&nbsp;{[{many[1]}]}&nbsp;the number of deployed instances of <b>{[{many[2]}]}</b>.&nbsp;
 			<button ng-click="removeMany($index)">Remove</button>
 		</td>
 	</tr>
 	
 	<tr ng-repeat="one in ones">
 		<td></td>
-		<td style="padding-bottom:20px">For one instance of component&nbsp;<b>{[{one[0]}]}</b>&nbsp;are deployed&nbsp;<b>{[{one[1]}]}</b>&nbsp;components&nbsp;<b>{[{one[2]}]}</b>&nbsp;
+		<td style="padding-bottom:20px">For each instance of component&nbsp;<b>{[{one[0]}]}</b>&nbsp;are deployed&nbsp;<b>{[{one[1]}]}</b>&nbsp;instances of&nbsp;<b>{[{one[2]}]}</b>.&nbsp;
 			<button ng-click="removeOne($index)">Remove</button>
 		</td>
 	</tr>
@@ -174,14 +174,14 @@
 	
 	<tr ng-repeat="instance in instances">
 		<td></td>
-		<td>Component&nbsp;<b>{[{instance[0]}]}</b>&nbsp;is deployed&nbsp;<b>{[{instance[3]}]}</b>&nbsp;<b>{[{instance[2]}]}</b>&nbsp;times
+		<td>Component&nbsp;<b>{[{instance[0]}]}</b>&nbsp;is deployed&nbsp;<b>{[{instance[3]}]}</b>&nbsp;<b>{[{instance[2]}]}</b>&nbsp;times.
 			<button ng-click="removeInstance($index)">Remove</button>
 			
 		</td>
 	</tr>
 	<tr ng-repeat="instanceBound in instancesBounds">
 		<td></td>
-		<td>Component &nbsp;<b>{[{instanceBound[1]}]}</b>&nbsp;is deployed at least&nbsp;<b>{[{instanceBound[0]}]}</b>&nbsp;and at most&nbsp;<b>{[{instanceBound[2]}]}</b>&nbsp;times;
+		<td>Component &nbsp;<b>{[{instanceBound[1]}]}</b>&nbsp;is deployed at least&nbsp;<b>{[{instanceBound[0]}]}</b>&nbsp;and at most&nbsp;<b>{[{instanceBound[2]}]}</b>&nbsp;times.
 			<button ng-click="removeInstanceBound($index)">Remove</button>
 		</td>
 	</tr>
