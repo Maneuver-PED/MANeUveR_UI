@@ -6,7 +6,7 @@
 	<tr>
 		<td colspan="2" style="padding-top:15px" align="center">
 			<div class="alert alert-info">
-				<strong>Specify the requirements for each component. If a specification for a component is not given then it is considered to have whatever specs.</strong>
+				<strong>Specify the requirements for each component</strong>
 			</div>
 		</td>
 	</tr>	
@@ -52,13 +52,14 @@
 			<tr>
 				<td><h5>Storage</h5></td>
 				<td>
-					<h5>Storage Type&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">HDD or SSD</span></div>&nbsp;&nbsp;<select ng-model="fullComp.Storage.StorageType">
+					<h5>Storage Type&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">HDD or SSD</span></div>&nbsp;&nbsp;
+						<select ng-model="fullComp.Storage.StorageType">
 						<option disabled selected value style="display:none">--</option>
 						<option value="HDD">HDD</option>
 						<option value="SSD">SSD</option>
 					</select>&nbsp;&nbsp;&nbsp;
 					Size&nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Storage size in GB</span></div>&nbsp;&nbsp;
-					<select ng-model="lowstorage">
+					<select ng-model="fullComp.Storage.StorageSize">
 						<option disabled selected value style="display:none">--</option>
 						<option value="1000">1</option>
 						<option value="2000">2</option>
@@ -103,14 +104,15 @@
 
 			<tr>
 				<td><h5>Network performance</h5></td>
-				<td><h5>Concurrent connections &nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18"><span class="tooltiptext">Number of concurrent connections.</span></div>&nbsp;&nbsp;
+				<td><!--<h5>Concurrent connections &nbsp;<div class="tooltip"><img src="static/tooltip_icon.png" width="18" height="18">
+					<span class="tooltiptext">Number of concurrent connections.</span></div>&nbsp;&nbsp;-->
 					<select ng-model="fullComp.Network.networkConnections">
 						<option disabled selected value style="display:none">&#45;&#45;</option>
-						<option value="1">Low</option>
-						<option value="2">Moderate</option>
-						<option value="3">High</option>
+						<option value="Low">Low</option>
+						<option value="Moderate">Moderate</option>
+						<option value="High">High</option>
 						</select>&nbsp;&nbsp;&nbsp;
-				</h5></td>
+				<!--</h5>--></td>
 
 				<td align="right"></td>
 			</tr>

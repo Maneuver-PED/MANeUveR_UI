@@ -37,17 +37,21 @@ app.controller("page1Controller", function($scope,$rootScope,$modal, $log) {
 	  mode : ""  
     };
 	$scope.compute={
-		CPU:0,
-		GPU:false,
-		Memory:0
+		CPU: 0,
+		GPU: false,
+		Memory: 0
 	}
 	$scope.storage={
-		StorageType:""
+		StorageType: "",
+		StorageSize: 0
+
 	}
 	$scope.network={
-		networkConnections:0,
+		/*networkConnections:0,
 		dataIn:0,
-		dataOut:0
+		dataOut:0*/
+        networkConnections: ""
+
 	}
 	$scope.component={
 		id:0,
